@@ -1,7 +1,9 @@
 #include <stdio.h>
+
 /**
- * main - prints the name of the file program was compiled from
- * Return: Always 0
+ * main - Entry point, prints file name it was compiled from
+ *
+ * Return: 0 (Success)
  */
 
 int main(void)
