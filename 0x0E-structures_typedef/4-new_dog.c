@@ -1,37 +1,70 @@
-dog_t *new_dog(char *name, float age, char *owner)
-{
-dog_t *snoopie;
-char *new_name, *new_owner;
+n_dog = malloc(sizeof(dog_t));
 
-if (name == NULL || owner == NULL)
+if (n_dog == NULL)
+return (NULL);
+
+nameLen = _strLen(name);
+n_dog->name = malloc(sizeof(char) * nameLen + 1);
+
+if (n_dog->name == NULL)
 {
+free(n_dog);
 return (NULL);
 }
 
-snoopie = malloc(sizeof(dog_t));
-if (snoopie == NULL)
+fillMem(name, nameLen, n_dog->name);
+
+ownerLen = _strLen(owner);
+n_dog->owner = malloc(sizeof(char) * ownerLen + 1);
+
+if (n_dog->owner == NULL)
 {
+free(n_dog);
+free(n_dog->name);
 return (NULL);
 }
 
-new_name = _copy(name);
-if (new_name == NULL)
-{
-free(snoopie);
-return (NULL);
+fillMem(owner, ownerLen, n_dog->owner);
+
+n_dog->age = age;
+
+return (n_dog);
 }
-(*snoopie).name = new_name;
 
-(*snoopie).age = age;
+/**
+ * _strLen - Get length of a string
+ *
+ * @str: A string
+ *
+ * Return: Length of string
+ */
 
-new_owner = _copy(owner);
-if (new_owner == NULL)
+int _strLen(char *str)
 {
-free((*snoopie).name);
-free(snoopie);
-return (NULL);
-}
-(*snoopie).owner = new_owner;
+int i = 0;
 
-return (snoopie);
+while (str[i])
+i++;
+
+return (i);
+}
+
+/**
+ * fillMem - Copy string literal to allocated memory
+ *
+ * @str: String literal
+ *
+ * @strLen: @str length
+ *
+ * @dest: The allocated memory
+ */
+
+void fillMem(char *str, int strLen, char *dest)
+{
+int i;
+
+for (i = 0; i < strLen; i++)
+dest[i] = str[i];
+
+dest[i] = '\0';
 }
